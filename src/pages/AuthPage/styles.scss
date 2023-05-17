@@ -1,0 +1,29 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../assets/BG_auth.png") center center no-repeat;
+}
+.auth {
+  width: 560px;
+  height: 615px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 40px;
+  background-color: #fff;
+  border-radius: 32px;
+}
+.auth-logo {
+  width: 100px;
+  height: 80px;
+  margin-bottom: 30px;
+}
+.auth-link {
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #49aaf5;
+}
