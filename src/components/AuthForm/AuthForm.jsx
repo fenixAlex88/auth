@@ -45,7 +45,7 @@ function AuthForm() {
     if (emailError && passError) {
       getUser();
     }
-  }, [getUser]);
+  }, [getUser, emailError, passError]);
 
   return (
     <form className="auth-form" onSubmit={formSubmitHandler}>
