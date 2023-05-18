@@ -41,7 +41,7 @@ function AuthForm() {
     dispatch(setUser({ email: data.email, token: 777, id: data.id }));
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     if (emailError && passError) {
       getUser();
     }
