@@ -24,7 +24,7 @@ function AuthForm() {
       dispatch(setUser({ email: data.email, token: 777, id: data.id }));
       navigate("/");
     } catch (e) {
-      alert(e.message);
+      console.error(e.message);
     }
 
     /* setEmailError(
