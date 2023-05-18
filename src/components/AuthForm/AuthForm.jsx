@@ -36,14 +36,10 @@ function AuthForm() {
     }
   };
 
-  async function getUser() {
-    const data = await login().unwrap();
-    dispatch(setUser({ email: data.email, token: 777, id: data.id }));
-  }
-
-  useEffect(() => {
+  useEffect(async () => {
     if (emailError && passError) {
-      getUser();
+      const data = await login().unwrap();
+      dispatch(setUser({ email: data.email, token: 777, id: data.id }));
     }
   }, [emailError, passError]);
 
