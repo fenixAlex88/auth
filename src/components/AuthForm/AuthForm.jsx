@@ -41,7 +41,7 @@ function AuthForm() {
       const data = await login().unwrap();
       dispatch(setUser({ email: data.email, token: 777, id: data.id }));
     }
-  }, [emailError, passError]);
+  }, [emailError, passError, dispatch, login]);
 
   return (
     <form className="auth-form" onSubmit={formSubmitHandler}>
