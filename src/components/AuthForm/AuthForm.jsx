@@ -36,12 +36,16 @@ function AuthForm() {
     }
   };
 
+  async function getUser() {
+    const data = await login().unwrap();
+    dispatch(setUser({ email: data.email, token: 777, id: data.id }));
+  }
+
   useEffect(async () => {
     if (emailError && passError) {
-      const data = await login().unwrap();
-      dispatch(setUser({ email: data.email, token: 777, id: data.id }));
+      getUser();
     }
-  }, [emailError, passError, dispatch, login]);
+  }, [getUser]);
 
   return (
     <form className="auth-form" onSubmit={formSubmitHandler}>
