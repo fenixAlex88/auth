@@ -1,6 +1,10 @@
-export const Required = (text, message = true) =>
-  text.length === 0 ? message : false;
-export const Max = (text, maxLength, message = true) =>
-  text.length > maxLength ? message : false;
-export const Min = (text, minLength, message = true) =>
-  text.length < minLength ? message : false;
+export default function validation(value, validators) {
+  let validationResult = null;
+  let i = 0;
+  while (validationResult === null && i < validators.length) {
+    const res = validators[i](value);
+    if (res) validationResult = res;
+    i += 1;
+  }
+  return validationResult;
+}

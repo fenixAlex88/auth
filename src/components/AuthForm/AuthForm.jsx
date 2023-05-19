@@ -1,51 +1,54 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { InputPassword, InputText } from "../Input";
-import { Max, Min, Required } from "../../utils/Validation";
 import "./styles.scss";
 import AuthButton from "../Buttons/AuthButton/AuthButton";
 import { useLoginMutation } from "../../store/userApi";
 import { setUser } from "../../store/slices/userSlice";
+import {
+  validation,
+  required,
+  minLength,
+  maxLength,
+} from "../../utils/validation";
 
 function AuthForm() {
   const dispatch = useDispatch();
-  //  const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [login] = useLoginMutation();
+
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passError, setPassError] = useState("");
   const MSG_1 = "Поле обязательно для заполнения";
-  const [login] = useLoginMutation();
-  const formSubmitHandler = (e) => {
+
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
-    try {
-      setEmailError(
-        Required(email, MSG_1) ||
-          Max(email, 64, "Максимальная длина 64 символа") ||
-          Min(email, 10, "Минимальная длина 10 символов"),
-      );
-      setPassError(
-        Required(pass, MSG_1) ||
-          Max(pass, 15, "Максимальная длина 15 символа") ||
-          Min(pass, 8, "Минимальная длина 8 символов"),
-      );
-      /* navigate("/"); */
-    } catch (e) {
-      // console.error(e.message);
+    const invalidEmail = validation(email, [
+      required(MSG_1),
+      minLength(10),
+      maxLength(64),
+    ]);
+    const invalidPass = validation(pass, [
+      required(MSG_1),
+      minLength(8),
+      maxLength(15),
+    ]);
+    if (invalidEmail || invalidPass) {
+      setEmailError(invalidEmail);
+      setPassError(invalidPass);
+    } else {
+      try {
+        const data = await login().unwrap();
+        dispatch(setUser({ email: data.email, token: 777, id: data.id }));
+        navigate("/");
+      } catch (e) {
+        // обрабатываем ошибку
+      }
     }
   };
-
-  async function getUser() {
-    const data = await login().unwrap();
-    dispatch(setUser({ email: data.email, token: 777, id: data.id }));
-  }
-
-  useEffect(() => {
-    if (emailError && passError) {
-      getUser();
-    }
-  }, [getUser, emailError, passError]);
 
   return (
     <form className="auth-form" onSubmit={formSubmitHandler}>

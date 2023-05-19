@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "../styles.scss";
 
+/* eslint-disable react/jsx-props-no-spreading */
 export default function InputPassword({
-  value,
   label = null,
-  placeholder = null,
-  onChange = null,
   error = null,
+  ...props
 }) {
   const [viewPass, setViewPass] = useState(false);
 
@@ -16,11 +15,9 @@ export default function InputPassword({
         {label}
         <input
           type={viewPass ? "text" : "password"}
-          value={value}
           autoComplete="off"
-          placeholder={placeholder}
           className="auth-input"
-          onChange={onChange}
+          {...props}
         />
         <button
           type="button"

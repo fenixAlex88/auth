@@ -1,23 +1,16 @@
 import "../styles.scss";
 
-export default function InputText({
-  value,
-  label = null,
-  placeholder = null,
-  onChange = null,
-  error = null,
-}) {
+/* eslint-disable react/jsx-props-no-spreading */
+export default function InputText({ label = null, error = null, ...props }) {
   return (
     <div className={error ? "error" : null}>
       <label className="auth-label">
         {label}
         <input
           type="text"
-          value={value}
           autoComplete="off"
-          placeholder={placeholder}
           className="auth-input"
-          onChange={(e) => onChange(e)}
+          {...props}
         />
       </label>
       {error && <div className="errorMessage">{error}</div>}

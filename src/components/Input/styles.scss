@@ -1,63 +1,88 @@
+// определяем переменные
+$border-color: #eaebed;
+$border-color-active: #49aaf5;
+$border-color-error: #ff4c4c;
+$background-color: #fff;
+$background-color-active: #f5fbff;
+$font-size: 16px;
+$font-weight: 400;
+$color: #353535;
+$color-placeholder: #eaebed;
+$color-error: #ff4c4c;
+$margin-top: 8px;
+$margin-bottom: 16px;
+$padding: 8px 16px;
+
+// определяем стили для компонента
 .auth-input {
   display: block;
   width: 390px;
   height: 50px;
   padding: 8px 16px;
-  margin-top: 8px;
-  margin-bottom: 16px;
+  margin-top: $margin-top;
+  margin-bottom: $margin-bottom;
   outline: none;
-  border: 2px solid #eaebed;
+  border: 2px solid $border-color;
   border-radius: 6px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #353535;
-  & ~ .showPass_btn {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  color: $color;
+
+  &~.showPass_btn {
     &.eye-off {
       background: url("../../assets/eye-off_inactive.png");
     }
+
     &.eye {
       background: url("../../assets/eye_inactive.png");
     }
   }
+
   &:not(:placeholder-shown) {
-    border-color: #49aaf5;
-    background-color: #f5fbff;
-    & ~ .showPass_btn {
+    border-color: $border-color-active;
+    background-color: $background-color-active;
+
+    &~.showPass_btn {
       &.eye-off {
         background: url("../../assets/eye-off.png");
       }
+
       &.eye {
         background: url("../../assets/eye.png");
       }
     }
   }
+
   &:focus {
-    border-color: #49aaf5;
-    background-color: #fff;
+    border-color: $border-color-active;
+    background-color: $background-color;
   }
+
   &::placeholder {
-    font-size: 16px;
-    font-weight: 400;
-    color: #eaebed;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    color: $color-placeholder;
   }
 }
 
 .error .auth-input {
-  margin-bottom: 8px;
-  border-color: #ff4c4c;
-  background-color: #fff;
+  margin-bottom: $margin-top; // используем ту же переменную для симметрии
+  border-color: $border-color-error;
+  background-color: $background-color;
 }
+
 .auth-label {
   position: relative;
-  font-size: 16px;
-  font-weight: 400;
-  color: #353535;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  color: $color;
 }
+
 .errorMessage {
-  font-weight: 400;
-  font-size: 14px;
-  color: #ff4c4c;
-  margin-bottom: 16px;
+  font-weight: $font-weight; // используем ту же переменную для единообразия
+  font-size: ($font-size - 2); // используем математическую операцию для задания размера шрифта
+  color: $color-error;
+  margin-bottom: $margin-bottom; // используем ту же переменную для симметрии
 }
 
 .showPass_btn {
