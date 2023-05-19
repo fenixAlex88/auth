@@ -46,19 +46,15 @@ describe("validation", () => {
     expect(result).toBe("Количество символов должно быть меньше 10");
   });
   // проверяем только на латинские символы
-    test("should return null if value passes regExp validators", () => {
+  test("should return null if value passes regExp validators", () => {
     // вызываем функцию validation с аргументами
-    const result = validation("Hello", [
-      patern(/^[A-Za-z]*$/),
-    ]);
+    const result = validation("Hello", [patern(/^[A-Za-z]*$/)]);
     // проверяем, что результат равен null
     expect(result).toBeNull();
   });
   test("should return error message if value fails regExp validators", () => {
     // вызываем функцию validation с аргументами
-    const result = validation("1Hello!", [
-      patern(/^[A-Za-z]*$/),
-    ]);
+    const result = validation("1Hello!", [patern(/^[A-Za-z]*$/)]);
     // проверяем, что результат равен null
     expect(result).toBe("Данные некоректны");
   });
