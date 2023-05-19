@@ -28,7 +28,7 @@ $padding: 8px 16px;
   font-weight: $font-weight;
   color: $color;
 
-  &~.showPass_btn {
+  & ~ .showPass_btn {
     &.eye-off {
       background: url("../../assets/eye-off_inactive.png");
     }
@@ -42,7 +42,7 @@ $padding: 8px 16px;
     border-color: $border-color-active;
     background-color: $background-color-active;
 
-    &~.showPass_btn {
+    & ~ .showPass_btn {
       &.eye-off {
         background: url("../../assets/eye-off.png");
       }
@@ -80,7 +80,9 @@ $padding: 8px 16px;
 
 .errorMessage {
   font-weight: $font-weight; // используем ту же переменную для единообразия
-  font-size: ($font-size - 2); // используем математическую операцию для задания размера шрифта
+  font-size: (
+    $font-size - 2
+  ); // используем математическую операцию для задания размера шрифта
   color: $color-error;
   margin-bottom: $margin-bottom; // используем ту же переменную для симметрии
 }

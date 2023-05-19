@@ -7683,7 +7683,16 @@
     "ansi-styles" "^5.0.0"
     "react-is" "^18.0.0"
 
-"pretty-format@^29.0.0", "pretty-format@^29.5.0":
+"pretty-format@^29.0.0":
+  "integrity" "sha512-V2mGkI31qdttvTFX7Mt4efOqHXqJWMu4/r66Xh3Z3BwZaPfPJgp6/gbwoujRpPUtfEF6AUUWx3Jim3GCw5g/Qw=="
+  "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-29.5.0.tgz"
+  "version" "29.5.0"
+  dependencies:
+    "@jest/schemas" "^29.4.3"
+    "ansi-styles" "^5.0.0"
+    "react-is" "^18.0.0"
+
+"pretty-format@^29.5.0":
   "integrity" "sha512-V2mGkI31qdttvTFX7Mt4efOqHXqJWMu4/r66Xh3Z3BwZaPfPJgp6/gbwoujRpPUtfEF6AUUWx3Jim3GCw5g/Qw=="
   "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-29.5.0.tgz"
   "version" "29.5.0"
