@@ -1,28 +1,33 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { InputPassword, InputText } from "../Input";
-import "./styles.scss";
-import AuthButton from "../Buttons/AuthButton/AuthButton";
+import { InputPassword, InputText } from "../../shared/ui/Inputs";
+import { ButtonBig } from "../../shared/ui/Buttons";
 import { useLoginMutation } from "../../store/userApi";
 import { setUser } from "../../store/slices/userSlice";
 import {
-  validation,
-  required,
-  minLength,
   maxLength,
-} from "../../utils/validation";
+  minLength,
+  required,
+  validation,
+} from "../../shared/lib/validation";
+import "./styles.scss";
 
 function AuthForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login] = useLoginMutation();
-
+  const passInput = useRef(null);
+  const emailInput = useRef(null);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passError, setPassError] = useState("");
   const MSG_1 = "Поле обязательно для заполнения";
+
+  const focusInputByRef = (ref) => {
+    ref.current?.focus();
+  };
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
@@ -39,15 +44,17 @@ function AuthForm() {
     if (invalidEmail || invalidPass) {
       setEmailError(invalidEmail);
       setPassError(invalidPass);
+      focusInputByRef(invalidEmail ? emailInput : passInput);
     } else {
       try {
         const data = await login().unwrap();
         dispatch(setUser({ email: data.email, token: 777, id: data.id }));
         navigate("/");
       } catch (e) {
-        // обрабатываем ошибку
+        setPassError(e.error);
       }
     }
+    setPass("");
   };
 
   return (
@@ -59,6 +66,7 @@ function AuthForm() {
         label="Имя пользователя"
         error={emailError}
         onChange={(e) => setEmail(e.target.value)}
+        ref={emailInput}
       />
       <InputPassword
         value={pass}
@@ -66,8 +74,9 @@ function AuthForm() {
         label="Пароль"
         error={passError}
         onChange={(e) => setPass(e.target.value)}
+        ref={passInput}
       />
-      <AuthButton text="войти" />
+      <ButtonBig text="войти" type="submit" />
     </form>
   );
 }
