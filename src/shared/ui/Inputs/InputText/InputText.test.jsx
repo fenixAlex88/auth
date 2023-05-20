@@ -58,7 +58,6 @@ describe("InputText", () => {
     expect(handleChange).toHaveBeenCalledTimes(4);
   });
 
-
   // Тест на привязку ссылки на элемент input через ref
   test("binds ref to input element", () => {
     // Создаем ref с помощью React.createRef()

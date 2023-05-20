@@ -1,21 +1,16 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { InputPassword, InputText } from "../../shared/ui/Inputs";
-import { ButtonBig } from "../../shared/ui/Buttons";
-import { useLoginMutation } from "../../store/userApi";
-import { setUser } from "../../store/slices/userSlice";
+import { useLoginMutation } from "shared/api";
 import {
   maxLength,
   minLength,
   required,
   validation,
-} from "../../shared/lib/validation";
-import "./styles.scss";
+} from "shared/lib/validation";
+import { setToken } from "./slices/authSlice";
 
-function AuthForm() {
+export function useAuthForm() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [login] = useLoginMutation();
   const passInput = useRef(null);
   const emailInput = useRef(null);
@@ -46,10 +41,11 @@ function AuthForm() {
       setPassError(invalidPass);
       focusInputByRef(invalidEmail ? emailInput : passInput);
     } else {
+      setEmailError("");
+      setPassError("");
       try {
         const data = await login().unwrap();
-        dispatch(setUser({ email: data.email, token: 777, id: data.id }));
-        navigate("/");
+        dispatch(setToken({ token: data.email }));
       } catch (e) {
         setPassError(e.error);
       }
@@ -57,28 +53,15 @@ function AuthForm() {
     setPass("");
   };
 
-  return (
-    <form className="auth-form" onSubmit={formSubmitHandler}>
-      <h1 className="auth-title">Добро пожаловать!</h1>
-      <InputText
-        value={email}
-        placeholder="Имя пользователя"
-        label="Имя пользователя"
-        error={emailError}
-        onChange={(e) => setEmail(e.target.value)}
-        ref={emailInput}
-      />
-      <InputPassword
-        value={pass}
-        placeholder="Пароль"
-        label="Пароль"
-        error={passError}
-        onChange={(e) => setPass(e.target.value)}
-        ref={passInput}
-      />
-      <ButtonBig text="войти" type="submit" />
-    </form>
-  );
+  return {
+    email,
+    pass,
+    emailError,
+    passError,
+    emailInput,
+    passInput,
+    setEmail,
+    setPass,
+    formSubmitHandler,
+  };
 }
-
-export default AuthForm;

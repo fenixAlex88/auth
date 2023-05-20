@@ -108,7 +108,15 @@ describe("InputPassword", () => {
     const ref = React.createRef();
 
     // Рендерим компонент с ref в пропсе ref
-    render(<InputPassword label="Password" value="" onChange={() => {}} ref={ref} data-testid="inputPassword"/>);
+    render(
+      <InputPassword
+        label="Password"
+        value=""
+        onChange={() => {}}
+        ref={ref}
+        data-testid="inputPassword"
+      />,
+    );
 
     // Получаем элемент input по роли textbox
     const input = screen.getByTestId("inputPassword");

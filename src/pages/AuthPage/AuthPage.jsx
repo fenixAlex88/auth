@@ -1,6 +1,6 @@
 import "./styles.scss";
-import logoImg from "../../shared/assets/logo.png";
-import AuthForm from "../../features/AuthForm/AuthForm";
+import logoImg from "shared/assets/logo.png";
+import { AuthForm } from "features/AuthForm";
 
 function AuthPage() {
   return (

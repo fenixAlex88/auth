@@ -40,6 +40,8 @@
         "endOfLine": "auto"
       }
     ],
-    "react/prop-types": ["off"]
+    "react/prop-types": ["off"],
+    "import/prefer-default-export": ["off"],
+    "import/no-unresolved": ["warn"]
   }
 }
