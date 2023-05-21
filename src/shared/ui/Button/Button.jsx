@@ -1,16 +1,11 @@
+import PropTypes from "prop-types";
 import { connectClassnames } from "shared/lib/dom";
 import classes from "./styles.module.scss";
 
 // Отключаем правило eslint для распространения пропсов
 /* eslint-disable react/jsx-props-no-spreading */
 
-export function Button({
-  children,
-  type = "button",
-  size = null,
-  variant = null,
-  ...props
-}) {
+export function Button({ children, type, size, variant, ...props }) {
   return (
     // Создаем элемент button с типом submit или button в зависимости от пропса type
     <button
@@ -26,3 +21,15 @@ export function Button({
     </button>
   );
 }
+
+Button.propTypes = {
+  type: PropTypes.oneOf(["button","submit"]),
+  size: PropTypes.string,
+  variant: PropTypes.string,
+};
+
+Button.defaultProps = {
+  type: "button",
+  size: null,
+  variant: null,
+};

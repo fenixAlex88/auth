@@ -1,32 +1,14 @@
-// определяем переменные
-$border-color: #eaebed;
-$border-color-active: #49aaf5;
-$border-color-error: #ff4c4c;
-$background-color: #fff;
-$background-color-active: #f5fbff;
-$font-size: 16px;
-$font-weight: 400;
-$color: #353535;
-$color-placeholder: #eaebed;
-$color-error: #ff4c4c;
-$margin-top: 8px;
-$margin-bottom: 16px;
-$padding: 8px 16px;
-
-// определяем стили для компонента
 .input {
   display: block;
   width: 390px;
   height: 50px;
   padding: 8px 16px;
-  margin-top: $margin-top;
-  margin-bottom: $margin-bottom;
+  margin-top: 8px;
+  margin-bottom: 16px;
   outline: none;
-  border: 2px solid $border-color;
+  border: 2px solid var(--color-gray-light);
   border-radius: 6px;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  color: $color;
+  color: var(--color-dark);
 
   & ~ .showPassBtn {
     &.eyeOff {
@@ -39,8 +21,8 @@ $padding: 8px 16px;
   }
 
   &:not(:placeholder-shown) {
-    border-color: $border-color-active;
-    background-color: $background-color-active;
+    border-color: var(--color-prymary);
+    background-color: var(--color-light);
 
     & ~ .showPassBtn {
       &.eyeOff {
@@ -54,37 +36,29 @@ $padding: 8px 16px;
   }
 
   &:focus {
-    border-color: $border-color-active;
-    background-color: $background-color;
+    border-color: var(--color-prymary);
+    background-color: var(--color-white);
   }
 
   &::placeholder {
-    font-size: $font-size;
-    font-weight: $font-weight;
-    color: $color-placeholder;
+    color: var(--color-gray-light);
   }
 }
 
 .error .input {
-  margin-bottom: $margin-top; // используем ту же переменную для симметрии
-  border-color: $border-color-error;
-  background-color: $background-color;
+  margin-bottom: 8px;
+  border-color: var(--color-danger);
+  background-color: var(--color-white);
 }
 
 .label {
   position: relative;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  color: $color;
 }
 
 .errorMessage {
-  font-weight: $font-weight; // используем ту же переменную для единообразия
-  font-size: (
-    $font-size - 2
-  ); // используем математическую операцию для задания размера шрифта
-  color: $color-error;
-  margin-bottom: $margin-bottom; // используем ту же переменную для симметрии
+  font-size: 0.875rem;
+  color: var(--color-danger);
+  margin-bottom: 16px;
 }
 
 .showPassBtn {

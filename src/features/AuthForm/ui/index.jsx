@@ -1,7 +1,7 @@
 import { InputField } from "shared/ui/InputField";
 import { Button } from "shared/ui/Button";
-import "./styles.scss";
 import { useAuthForm } from "../model";
+import classes from "./styles.module.scss";
 
 export function AuthForm() {
   const {
@@ -17,8 +17,8 @@ export function AuthForm() {
   } = useAuthForm();
 
   return (
-    <form className="auth-form" onSubmit={formSubmitHandler}>
-      <h1 className="auth-title">Добро пожаловать!</h1>
+    <form className={classes.form} onSubmit={formSubmitHandler}>
+      <h1 className={classes.title}>Добро пожаловать!</h1>
       <InputField
         value={email}
         placeholder="Имя пользователя"
