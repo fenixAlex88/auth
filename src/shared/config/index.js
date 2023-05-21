@@ -10,6 +10,7 @@
  * @throwable
  */
 const getEnvVar = (key) => {
+  console.log(process.env);
   if (process.env[key] === undefined) {
     throw new Error(`Env variable ${key} is required`);
   }
@@ -17,8 +18,7 @@ const getEnvVar = (key) => {
 };
 
 /** API entrypoint */
-export const API_URL = "https://jsonplaceholder.typicode.com";
-/* getEnvVar("REACT_APP_API_URL"); */
+export const API_URL = getEnvVar("REACT_APP_API_URL");
 
 /** Режим запуска программы */
 export const NODE_ENV = getEnvVar("NODE_ENV");

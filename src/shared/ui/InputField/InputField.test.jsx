@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 // Импортируем компонент InputPassword
-import InputPassword from "./InputPassword";
+import { InputField } from "./InputField";
 
 // Описываем набор тестов для компонента InputPassword
 describe("InputPassword", () => {
@@ -11,32 +11,37 @@ describe("InputPassword", () => {
   test("renders input with label and error", () => {
     // Рендерим компонент с пропсами label и error
     render(
-      <InputPassword
-        label="Password"
+      <InputField
+        label="Name"
         error="This field is required"
-        placeholder="Enter your password"
+        placeholder="Enter your name"
         value=""
         onChange={() => {}}
-        data-testid="inputPassword"
+        data-testid="inputName"
       />,
     );
 
-    // Проверяем, что есть элемент с текстом "Password"
-    expect(screen.getByText("Password")).toBeInTheDocument();
-    // Проверяем, что есть элемент с текстом "Enter your password"
-    expect(
-      screen.getByPlaceholderText("Enter your password"),
-    ).toBeInTheDocument();
+    // Проверяем, что есть элемент с текстом "Name"
+    expect(screen.getByText("Name")).toBeInTheDocument();
+    // Проверяем, что есть элемент с текстом "Enter your name"
+    expect(screen.getByPlaceholderText("Enter your name")).toBeInTheDocument();
     // Проверяем, что есть элемент с текстом "This field is required"
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     // Проверяем, что есть элемент input по testID
-    expect(screen.getByTestId("inputPassword")).toBeInTheDocument();
+    expect(screen.getByTestId("inputName")).toBeInTheDocument();
   });
 
   // Тест на рендеринг компонента без пропса error
   test("renders input without error", () => {
     // Рендерим компонент без пропса error
-    render(<InputPassword label="Password" value="" onChange={() => {}} />);
+    render(
+      <InputField
+        type="password"
+        label="Password"
+        value=""
+        onChange={() => {}}
+      />,
+    );
 
     // Проверяем, что нет элемента с атрибутом errorMessage
     const nextElement = screen.queryByTestId("errorMessage");
@@ -49,17 +54,10 @@ describe("InputPassword", () => {
     const handleChange = jest.fn();
 
     // Рендерим компонент с мок-функцией в пропсе onChange
-    render(
-      <InputPassword
-        label="Password"
-        value=""
-        onChange={handleChange}
-        data-testid="inputPassword"
-      />,
-    );
+    render(<InputField label="Login" value="" onChange={handleChange} />);
 
-    // Получаем элемент input по testID
-    const input = screen.getByTestId("inputPassword");
+    // Получаем элемент input по роли textbox
+    const input = screen.getByRole("textbox");
 
     // Симулируем ввод текста в input
     userEvent.type(input, "qwerty123");
@@ -72,7 +70,8 @@ describe("InputPassword", () => {
   test("toggles input type between password and text when clicking on showPass_btn button", () => {
     // Рендерим компонент с любыми пропсами
     render(
-      <InputPassword
+      <InputField
+        type="password"
         label="Password"
         value="qwerty123"
         onChange={() => {}}
@@ -109,19 +108,13 @@ describe("InputPassword", () => {
 
     // Рендерим компонент с ref в пропсе ref
     render(
-      <InputPassword
-        label="Password"
-        value=""
-        onChange={() => {}}
-        ref={ref}
-        data-testid="inputPassword"
-      />,
+      <InputField label="Address" value="" onChange={() => {}} ref={ref} />,
     );
 
     // Получаем элемент input по роли textbox
-    const input = screen.getByTestId("inputPassword");
+    const input = screen.getByRole("textbox");
 
-    // Проверяем, что ref.current указывает на элемент button
+    // Проверяем, что ref.current указывает на элемент input
     expect(ref.current).toBe(input);
   });
 });

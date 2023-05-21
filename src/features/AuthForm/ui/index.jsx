@@ -1,7 +1,7 @@
-import { InputPassword, InputText } from "shared/ui/Inputs";
-import { ButtonBig } from "shared/ui/Buttons";
+import { InputField } from "shared/ui/InputField";
+import { Button } from "shared/ui/Button";
 import "./styles.scss";
-import { useAuthForm } from "../model/useAuthForm";
+import { useAuthForm } from "../model";
 
 export function AuthForm() {
   const {
@@ -19,23 +19,26 @@ export function AuthForm() {
   return (
     <form className="auth-form" onSubmit={formSubmitHandler}>
       <h1 className="auth-title">Добро пожаловать!</h1>
-      <InputText
+      <InputField
         value={email}
         placeholder="Имя пользователя"
         label="Имя пользователя"
         error={emailError}
-        onChange={(e) => setEmail(e.target.value)}
         ref={emailInput}
+        onChange={(e) => setEmail(e.target.value)}
       />
-      <InputPassword
+      <InputField
+        type="password"
         value={pass}
         placeholder="Пароль"
         label="Пароль"
         error={passError}
-        onChange={(e) => setPass(e.target.value)}
         ref={passInput}
+        onChange={(e) => setPass(e.target.value)}
       />
-      <ButtonBig text="войти" type="submit" />
+      <Button type="submit" size="large" variant="warning">
+        войти
+      </Button>
     </form>
   );
 }
