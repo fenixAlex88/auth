@@ -39,7 +39,7 @@
       "off"
     ],
     "react/jsx-props-no-spreading": [
-      "warn"
+      "off"
     ],
     "no-shadow": "off",
     "jsx-a11y/label-has-associated-control": [
@@ -61,10 +61,10 @@
       "off"
     ],
     "import/no-unresolved": [
-      "warn"
+      "off"
     ],
     "no-nested-ternary": [
-      "warn"
+      "off"
     ]
   }
 }
