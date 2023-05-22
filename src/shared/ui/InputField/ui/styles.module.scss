@@ -1,7 +1,10 @@
+$width: 390px;
+$height: 50px;
+
 .input {
   display: block;
-  width: 390px;
-  height: 50px;
+  width: 100%;
+  height: $height;
   padding: 8px 16px;
   margin-top: 8px;
   margin-bottom: 16px;
@@ -12,11 +15,11 @@
 
   & ~ .showPassBtn {
     &.eyeOff {
-      background: url("../../assets/eye-off_inactive.png");
+      background: url("../../../assets/eye-off_inactive.png");
     }
 
     &.eye {
-      background: url("../../assets/eye_inactive.png");
+      background: url("../../../assets/eye_inactive.png");
     }
   }
 
@@ -26,11 +29,11 @@
 
     & ~ .showPassBtn {
       &.eyeOff {
-        background: url("../../assets/eye-off.png");
+        background: url("../../../assets/eye-off.png");
       }
 
       &.eye {
-        background: url("../../assets/eye.png");
+        background: url("../../../assets/eye.png");
       }
     }
   }
@@ -52,7 +55,9 @@
 }
 
 .label {
+  display: block;
   position: relative;
+  width: $width;
 }
 
 .errorMessage {

@@ -1,8 +1,7 @@
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
+import PropTypes from "prop-types";
+import { useInputField } from "../model/InputField";
 import classes from "./styles.module.scss";
-
-// Отключаем правило eslint для распространения пропсов
-/* eslint-disable react/jsx-props-no-spreading */
 
 // Создаем компонент InputText с использованием forwardRef
 export const InputField = forwardRef(function InputText(
@@ -10,8 +9,10 @@ export const InputField = forwardRef(function InputText(
   // Получаем ссылку на элемент input через ref
   ref,
 ) {
-  // Для input типа создаем локальное состояние для переключения типа
-  const [viewPass, setViewPass] = useState(false);
+  // Используем кастомный хук useInputField для получения состояния и функций для input типа password
+  const { handleToggleViewPass, getInputType, getShowPassBtnClass } =
+    useInputField(type);
+
   return (
     // Оборачиваем все в div с классом error, если есть ошибка
     <div className={error ? classes.error : null}>
@@ -20,7 +21,7 @@ export const InputField = forwardRef(function InputText(
         {label}
         {/* Создаем input с типом text */}
         <input
-          type={type === "password" ? (viewPass ? "text" : "password") : type}
+          type={getInputType()}
           autoComplete="off"
           className={classes.input}
           {...props}
@@ -31,11 +32,9 @@ export const InputField = forwardRef(function InputText(
         {type === "password" && (
           <button
             type="button"
-            className={`${classes.showPassBtn} ${
-              viewPass ? classes.eyeOff : classes.eye
-            }`}
+            className={getShowPassBtnClass()}
             // При клике по кнопке меняем состояние viewPass на противоположное
-            onClick={() => setViewPass(!viewPass)}
+            onClick={handleToggleViewPass}
           />
         )}
       </label>
@@ -48,3 +47,15 @@ export const InputField = forwardRef(function InputText(
     </div>
   );
 });
+
+InputField.propTypes = {
+  type: PropTypes.oneOf(["text", "password"]),
+  label: PropTypes.string,
+  error: PropTypes.string,
+};
+
+InputField.defaultProps = {
+  type: "text",
+  label: null,
+  error: null,
+};

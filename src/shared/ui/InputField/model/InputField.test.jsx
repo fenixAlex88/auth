@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 // Импортируем компонент InputPassword
-import { InputField } from "./InputField";
+import { InputField } from "../ui/InputField";
 
 // Описываем набор тестов для компонента InputPassword
 describe("InputPassword", () => {

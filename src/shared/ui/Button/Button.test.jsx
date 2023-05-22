@@ -34,28 +34,28 @@ describe("Button", () => {
     expect(button).toHaveAttribute("type", "submit");
   });
 
-  // Тестируем, что компонент рендерится с пропсом size="small"
-  test("renders with size small", () => {
-    // Рендерим компонент с текстом "Small" и пропсом size="small"
-    render(<Button size="small">Small</Button>);
+  // Тестируем, что компонент рендерится с пропсом size="large"
+  test("renders with size large", () => {
+    // Рендерим компонент с текстом "Small" и пропсом size="large"
+    render(<Button size="large">Large</Button>);
 
     // Получаем элемент button по тексту
-    const button = screen.getByText("Small");
+    const button = screen.getByText("Large");
 
     // Проверяем, что элемент button имеет класс small из стилей
-    expect(button).toHaveClass(classes.small);
+    expect(button).toHaveClass(classes.large);
   });
 
   // Тестируем, что компонент рендерится с пропсом variant="primary"
   test("renders with variant primary", () => {
     // Рендерим компонент с текстом "Primary" и пропсом variant="primary"
-    render(<Button variant="primary">Primary</Button>);
+    render(<Button variant="warning">Warning</Button>);
 
     // Получаем элемент button по тексту
-    const button = screen.getByText("Primary");
+    const button = screen.getByText("Warning");
 
     // Проверяем, что элемент button имеет класс primary из стилей
-    expect(button).toHaveClass(classes.primary);
+    expect(button).toHaveClass(classes.warning);
   });
 
   // Тест на вызов функции onClick при клике на кнопку

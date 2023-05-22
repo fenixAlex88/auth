@@ -5,13 +5,13 @@ import classes from "./styles.module.scss";
 
 export function AuthForm() {
   const {
-    email,
+    name,
     pass,
-    emailError,
+    nameError,
     passError,
-    emailInput,
+    nameInput,
     passInput,
-    setEmail,
+    setName,
     setPass,
     formSubmitHandler,
   } = useAuthForm();
@@ -20,12 +20,12 @@ export function AuthForm() {
     <form className={classes.form} onSubmit={formSubmitHandler}>
       <h1 className={classes.title}>Добро пожаловать!</h1>
       <InputField
-        value={email}
+        value={name}
         placeholder="Имя пользователя"
         label="Имя пользователя"
-        error={emailError}
-        ref={emailInput}
-        onChange={(e) => setEmail(e.target.value)}
+        error={nameError}
+        ref={nameInput}
+        onChange={(e) => setName(e.target.value)}
       />
       <InputField
         type="password"

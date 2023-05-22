@@ -13,10 +13,10 @@ export function useAuthForm() {
   const dispatch = useDispatch();
   const [login] = useLoginMutation();
   const passInput = useRef(null);
-  const emailInput = useRef(null);
-  const [email, setEmail] = useState("");
+  const nameInput = useRef(null);
+  const [name, setName] = useState("");
   const [pass, setPass] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
   const [passError, setPassError] = useState("");
   const MSG_1 = "Поле обязательно для заполнения";
 
@@ -26,7 +26,7 @@ export function useAuthForm() {
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
-    const invalidEmail = validation(email, [
+    const invalidName = validation(name, [
       required(MSG_1),
       minLength(10),
       maxLength(64),
@@ -36,12 +36,12 @@ export function useAuthForm() {
       minLength(8),
       maxLength(15),
     ]);
-    if (invalidEmail || invalidPass) {
-      setEmailError(invalidEmail);
+    if (invalidName || invalidPass) {
+      setNameError(invalidName);
       setPassError(invalidPass);
-      focusInputByRef(invalidEmail ? emailInput : passInput);
+      focusInputByRef(invalidName ? nameInput : passInput);
     } else {
-      setEmailError("");
+      setNameError("");
       setPassError("");
       try {
         const data = await login().unwrap();
@@ -54,13 +54,13 @@ export function useAuthForm() {
   };
 
   return {
-    email,
+    name,
     pass,
-    emailError,
+    nameError,
     passError,
-    emailInput,
+    nameInput,
     passInput,
-    setEmail,
+    setName,
     setPass,
     formSubmitHandler,
   };
