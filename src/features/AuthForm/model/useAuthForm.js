@@ -11,7 +11,7 @@ import { setToken } from "./slices/authSlice";
 
 export function useAuthForm() {
   const dispatch = useDispatch();
-  const [login] = useLoginMutation();
+  const [signIn] = useLoginMutation();
   const passInput = useRef(null);
   const nameInput = useRef(null);
   const [name, setName] = useState("");
@@ -20,36 +20,55 @@ export function useAuthForm() {
   const [passError, setPassError] = useState("");
   const MSG_1 = "Поле обязательно для заполнения";
 
+  // Функция для фокуса на элементе по ссылке
   const focusInputByRef = (ref) => {
     ref.current?.focus();
   };
 
+  // Функция для валидации поля
+  const validateField = (text, min, max) => {
+    return validation(text, [required(MSG_1), minLength(min), maxLength(max)]);
+  };
+
+  // Функция для обработки ошибок
+  const handleError = (nameError, passError) => {
+    setNameError(nameError);
+    setPassError(passError);
+    focusInputByRef(nameError ? nameInput : passInput);
+  };
+
+  // Функция для аутентификации
+  const authenticate = async (name, pass) => {
+    try {
+      const data = await signIn(name, pass).unwrap();
+      return { data };
+    } catch (e) {
+      return { error: e.error };
+    }
+  };
+
+  // Основная функция для отправки формы
   const formSubmitHandler = async (e) => {
     e.preventDefault();
-    const invalidName = validation(name, [
-      required(MSG_1),
-      minLength(10),
-      maxLength(64),
-    ]);
-    const invalidPass = validation(pass, [
-      required(MSG_1),
-      minLength(8),
-      maxLength(15),
-    ]);
-    if (invalidName || invalidPass) {
-      setNameError(invalidName);
-      setPassError(invalidPass);
-      focusInputByRef(invalidName ? nameInput : passInput);
+    // Валидируем имя и пароль
+    const nameError = validateField(name, 10, 64);
+    const passError = validateField(pass, 8, 15);
+    // Если есть ошибки, обрабатываем их
+    if (nameError || passError) {
+      handleError(nameError, passError);
     } else {
-      setNameError("");
-      setPassError("");
-      try {
-        const data = await login().unwrap();
-        dispatch(setToken({ token: data.email }));
-      } catch (e) {
-        setPassError(e.error);
+      // Если нет ошибок, пытаемся аутентифицироваться
+      const { data, error } = await authenticate(name, pass);
+      // Если есть данные, сохраняем токен
+      if (data) {
+        dispatch(setToken({ token: data.phone }));
+      }
+      // Если есть ошибка, обрабатываем ее
+      if (error) {
+        handleError("", error);
       }
     }
+    // Очищаем поле пароля
     setPass("");
   };
 

@@ -1,5 +1,6 @@
 import logoImg from "shared/assets/logo.png";
 import { AuthForm } from "features/AuthForm";
+import { Hlink } from "shared/ui/Hlink";
 import classes from "./styles.module.scss";
 
 function AuthPage() {
@@ -11,9 +12,7 @@ function AuthPage() {
         </div>
         <AuthForm />
         <div>
-          <a href="/#" className={classes.link}>
-            Забыли пароль?
-          </a>
+          <Hlink href="/#" text="Забыли пароль?" />
         </div>
       </div>
     </div>

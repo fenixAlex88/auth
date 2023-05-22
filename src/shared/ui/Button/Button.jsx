@@ -24,12 +24,12 @@ export function Button({ children, type, size, variant, ...props }) {
 
 Button.propTypes = {
   type: PropTypes.oneOf(["button", "submit"]),
-  size: PropTypes.oneOf([null, "large"]),
-  variant: PropTypes.oneOf([null, "warning"]),
+  size: PropTypes.oneOf(["normal", "large"]),
+  variant: PropTypes.oneOf(["primary", "warning"]),
 };
 
 Button.defaultProps = {
   type: "button",
-  size: null,
-  variant: null,
+  size: "normal",
+  variant: "primary",
 };
