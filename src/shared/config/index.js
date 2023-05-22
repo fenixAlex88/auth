@@ -10,7 +10,6 @@
  * @throwable
  */
 const getEnvVar = (key) => {
-  console.log(process.env);
   if (process.env[key] === undefined) {
     throw new Error(`Env variable ${key} is required`);
   }
