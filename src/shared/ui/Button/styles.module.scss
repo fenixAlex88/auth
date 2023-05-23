@@ -30,11 +30,11 @@
 
   &.primary {
     color: var(--color-white);
-    background-color: var(--color-prymary);
-    box-shadow: 0 6px 0 var(--color-prymary-dark);
+    background-color: var(--color-primary);
+    box-shadow: 0 6px 0 var(--color-primary-dark);
 
     &:active {
-      box-shadow: 0px -6px 0px var(--color-prymary-dark);
+      box-shadow: 0px -6px 0px var(--color-primary-dark);
       transform: translateY(6px);
     }
   }

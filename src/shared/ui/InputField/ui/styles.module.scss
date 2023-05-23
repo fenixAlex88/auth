@@ -24,7 +24,7 @@ $height: 50px;
   }
 
   &:not(:placeholder-shown) {
-    border-color: var(--color-prymary);
+    border-color: var(--color-primary);
     background-color: var(--color-light);
 
     & ~ .showPassBtn {
@@ -39,7 +39,7 @@ $height: 50px;
   }
 
   &:focus {
-    border-color: var(--color-prymary);
+    border-color: var(--color-primary);
     background-color: var(--color-white);
   }
 

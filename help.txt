@@ -4,6 +4,13 @@
     }
   }
 
+  // Функция обработки ввода символов
+    function allowEnterName(e) {
+      if (e.target.value && /^[A-Za-z._]*$/.test(e.target.value)) {
+        setUsername(e.target.value);
+      }
+    }
+
 
 
 /auth/token/login <- POST

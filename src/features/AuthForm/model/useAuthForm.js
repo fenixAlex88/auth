@@ -23,7 +23,7 @@ export function useAuthForm() {
 
   // Очищаем поля при вводе
   useEffect(() => {
-    setNameError("");
+    if (username) setNameError("");
   }, [username]);
   useEffect(() => {
     if (password) setPassError("");
@@ -70,7 +70,7 @@ export function useAuthForm() {
       const { data, error } = await authenticate(username, password);
       // Если есть данные, сохраняем токен
       if (data) {
-        dispatch(setToken({ token: data.auth_token, userName: username }));
+        dispatch(setToken({ token: data.auth_token }));
       }
       // Если есть ошибка, обрабатываем ее
       else if (error) {
@@ -83,14 +83,14 @@ export function useAuthForm() {
   };
 
   return {
-    name: username,
-    pass: password,
+    username,
+    password,
     nameError,
     passError,
     nameInput,
     passInput,
-    setName: setUsername,
-    setPass: setPassword,
+    setUsername,
+    setPassword,
     formSubmitHandler,
   };
 }
