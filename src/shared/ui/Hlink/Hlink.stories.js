@@ -1,5 +1,5 @@
 import { Hlink } from "./Hlink";
-import "app/index.scss";
+import "../../../../../2/auth/src/app/index.scss";
 
 export default {
   title: "Link",

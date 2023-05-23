@@ -1,5 +1,5 @@
 import { Button } from "./Button";
-import "app/index.scss";
+import "../../../../../2/auth/src/app/index.scss";
 
 export default {
   title: "Button",
