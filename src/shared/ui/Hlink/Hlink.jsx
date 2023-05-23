@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
+import { connectClassnames } from "shared/lib/dom";
 import classes from "./styles.module.scss";
-import { connectClassnames } from "../../lib/dom";
 
 // Кастомный компонент Hlink, который принимает пропсы href, text и onClick
 export function Hlink({ href, text, onClick, variant }) {
